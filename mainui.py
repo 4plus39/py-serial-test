@@ -1,23 +1,23 @@
 import tkinter as tk
-import testIO
-import testUI
+import testio
+import testui
 
 
 def scanning():
     # Only do this if the Stop button has not been clicked
-    if testUI.running:
+    if testui.running:
         serial.name = app.device.get()
-        serial.config(115200, 0.1)
+        serial.config(115200, 0.5)
         serial.send()
 
     # After 0.1 second, call scanning again (create a recursive loop)
-    root.after(100, scanning)
+    root.after(500, scanning)
 
 
-serial = testIO.SerialPort(None)
+serial = testio.SerialPort(None)
 serial.scan()
 root = tk.Tk()
-app = testUI.UI(root)
+app = testui.UI(root)
 app.device['values'] = serial.device
 
 # After 0.1 second, call scanning

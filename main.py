@@ -1,51 +1,71 @@
-import time
-import keyboard
-import testIO
 import os
+import keyboard
+import testio
 
-counter = 0
-
-serial = testIO.SerialPort(None)
-
-# text mode interface
-print("-------------------------------------")
-serial.scan()
-print("-------------------------------------")
-serial.list()
-print("")
-serial.input()
-print("-------------------------------------")
-
-# serial port settings
-serial.config(115200, 0.1)
-
-# show serial port settings
-if serial.port.is_open :
-    print("Serial port [",serial.name,"] is open")
-    time.sleep(1)
+# CONST NAME
+BAU_RATE = 115200
+TIME_OUT = 0.5
 
 
-while True:
-    if serial.system.lower() == "linux":
-        os.system('clear')
-    elif serial.system.lower() == "windows":
-        os.system('cls')
+def pause():
+    print()
+    input("Press the <ENTER> key to continue...")
 
-    print("-------------------------------------")
-    print("!!! ---Start test--- !!!")
-    print("-------------------------------------")
-    print("Serial port =", serial.name)
-    print("Baud rate = 115200")
-    print("Time out = 0.1")
-    print("-------------------------------------")
-    print("Succeed count", counter)
-    print("-------------------------------------")
 
-    serial.send()
-    # print(serial.read())
-    time.sleep(0.1)
-    counter += 1
-    if keyboard.is_pressed('q'):
-        print("!!! ---Quit test--- !!!")
+def clear_screen():
+    if serial_port.system.lower() == "linux":
+        os.system("clear")
+    elif serial_port.system.lower() == "windows":
+        os.system("cls")
+
+
+def printer():
+    count = 0
+    f_count = 0
+    n_list = []
+
+    while not keyboard.is_pressed('q'):
+        print("---Test------------------------------")
+        print("Serial port =", serial_port.name)
+        print("Baud rate =", BAU_RATE)
+        print("Time out =", TIME_OUT)
         print("-------------------------------------")
-        break
+        print("Press key 'Q' to quit")
+
+        serial_port.send()
+        count += 1
+        # print(serial_port.read())
+        if serial_port.read() == n_list:
+            clear_screen()
+            print("Status: FAILED ")
+            f_count += 1
+        else:
+            clear_screen()
+            print("Status: PASS ")
+
+    print("---Result-----------------------------")
+    print("Succeed count:", count)
+    print("Failed count:", f_count)
+    print("Success rate:", (count-f_count)/count*100, "%")
+    print("-------------------------------------")
+
+
+if __name__ == '__main__':
+    serial_port = testio.SerialPort(None)
+
+    # text mode interface
+    serial_port.scan()
+    print("-------------------------------------")
+    serial_port.list()
+    print("")
+    serial_port.input()
+    print('-------------------------------------')
+
+    # serial port settings
+    serial_port.config(BAU_RATE, TIME_OUT)
+
+    # show serial port settings
+    if serial_port.port.is_open:
+        print("Serial port [", serial_port.name, "] is open")
+        pause()
+        printer()
