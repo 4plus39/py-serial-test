@@ -20,16 +20,17 @@ def loop():
         else:
             app.status_pass()
 
-    # After 0.1 second, call loop() again (create a recursive loop)
+    # After TIME_OUT second, call loop() again (create a recursive loop)
     root.after(TIME_OUT, loop)
 
 
-serial_port = testio.SerialPort(None)
-serial_port.scan()
-root = tk.Tk()
-app = testui.UI(root)
-app.device['values'] = serial_port.device
+if __name__ == '__main__':
+    serial_port = testio.SerialPort(None)
+    serial_port.scan()
+    root = tk.Tk()
+    app = testui.UI(root)
+    app.device['values'] = serial_port.device
 
-# After 0.1 second, call scanning
-root.after(TIME_OUT, loop)
-root.mainloop()
+    # After TIME_OUT second, call scanning
+    root.after(TIME_OUT, loop)
+    root.mainloop()
