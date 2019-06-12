@@ -5,6 +5,7 @@ import testio
 # CONST NAME
 BAU_RATE = 115200
 TIME_OUT = 0.5
+NULL_LIST = []
 
 
 def pause():
@@ -35,7 +36,7 @@ def printer():
         serial_port.send()
         count += 1
         # print(serial_port.read())
-        if serial_port.read() == n_list:
+        if serial_port.read() == NULL_LIST:
             clear_screen()
             print("Status: FAILED ")
             f_count += 1
