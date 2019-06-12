@@ -23,7 +23,6 @@ def clear_screen():
 def printer():
     count = 0
     f_count = 0
-    n_list = []
 
     while not keyboard.is_pressed('q'):
         print("---Test------------------------------")
