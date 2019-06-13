@@ -28,7 +28,6 @@ class UI:
         self.status.grid(row=2, column=0, padx=0, pady=10)
 
         self.n_status = tk.Label(frame, text="")
-        # self.n_status.grid(row=2, column=1, padx=0, pady=10)
 
     def start_test(self):
         global running
@@ -44,7 +43,6 @@ class UI:
         running = False
 
         self.testButton.config(text="Start test", command=self.start_test)
-        # print(self.device.current(), self.device.get())
 
         self.n_status.grid_forget()
 

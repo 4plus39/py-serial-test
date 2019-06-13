@@ -1,11 +1,7 @@
 import os
 import keyboard
 import testio
-
-# CONST NAME
-BAU_RATE = 115200
-TIME_OUT = 0.5
-NULL_LIST = []
+import const
 
 
 def pause():
@@ -27,15 +23,15 @@ def printer():
     while not keyboard.is_pressed('q'):
         print("---Test------------------------------")
         print("Serial port =", serial_port.name)
-        print("Baud rate =", BAU_RATE)
-        print("Time out =", TIME_OUT)
+        print("Baud rate =", const.BAU_RATE)
+        print("Time out =", const.TIME_OUT)
         print("-------------------------------------")
         print("Press key 'Q' to quit")
 
         serial_port.send()
         count += 1
         # print(serial_port.read())
-        if serial_port.read() == NULL_LIST:
+        if serial_port.read() == const.NULL_LIST:
             clear_screen()
             print("Status: FAILED ")
             f_count += 1
@@ -46,8 +42,9 @@ def printer():
     print("---Result-----------------------------")
     print("Succeed count:", count)
     print("Failed count:", f_count)
-    print("Success rate:", (count-f_count)/count*100, "%")
+    print("Success rate:", (count-f_count)/count*100, '%')
     print("-------------------------------------")
+    return count, f_count
 
 
 if __name__ == '__main__':
@@ -62,7 +59,7 @@ if __name__ == '__main__':
     print('-------------------------------------')
 
     # serial port settings
-    serial_port.config(BAU_RATE, TIME_OUT)
+    serial_port.config(const.BAU_RATE, const.TIME_OUT)
 
     # show serial port settings
     if serial_port.port.is_open:

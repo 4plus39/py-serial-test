@@ -17,9 +17,8 @@ class SerialPort(object):
         elif self.system.lower() == "windows":
             ports = ['COM%s' % (i + 1) for i in range(256)]
         else:
-            print ("Unknown os")
+            print("Unknown os")
 
-        # print "OS: " ,self.system
         for port in ports:
             try:
                 s = serial.Serial(port)
@@ -35,8 +34,8 @@ class SerialPort(object):
     def input(self):
         self.name = self.device[int(input("Input serial device number:"))]
 
-    def config(self, b_rate, t_out):
-        self.port = serial.Serial(self.name, b_rate, timeout=t_out)
+    def config(self, bau_rate, time_out):
+        self.port = serial.Serial(self.name, bau_rate, timeout=time_out)
 
     def send(self):
         self.port.write(str.encode('ATI\r'))
