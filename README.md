@@ -24,3 +24,17 @@ Use the package manager apt to install tkinter.
 
 ### GUI mode
     sudo python mainUI.py
+
+## Image
+### Text mode
+![](./images/text_start.png)
+
+![](./images/text_pass.png)
+
+![](./images/text_result.png)
+### GUI mode
+![](./images/start.png)
+![](./images/select.png)  
+![](./images/failed.png)
+![](./images/pass.png)
+
