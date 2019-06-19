@@ -6,7 +6,11 @@ import const
 
 def pause():
     print()
-    input("Press the <ENTER> key to continue...")
+    try:
+        input("Press the <ENTER> key to continue...")
+    except SyntaxError:
+        pass
+    clear_screen()
 
 
 def clear_screen():
@@ -39,16 +43,16 @@ def printer():
             clear_screen()
             print("Status: PASS ")
 
-    print("---Result-----------------------------")
+    print("r")
     print("Succeed count:", count)
     print("Failed count:", f_count)
-    print("Success rate:", (count-f_count)/count*100, '%')
-    print("-------------------------------------")
-    return count, f_count
+    print("Success rate:%.2f" % ((count-f_count)/count*100)+"%")
+    print("--------------------------------------")
 
 
 if __name__ == '__main__':
     serial_port = testio.SerialPort(None)
+    clear_screen()
 
     # text mode interface
     serial_port.scan()
