@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # Global flag
-running = False
+FLAG = False
 
 
 class UI:
@@ -30,8 +30,8 @@ class UI:
         self.n_status = tk.Label(frame, text="")
 
     def start_test(self):
-        global running
-        running = True
+        global FLAG
+        FLAG = True
 
         self.testButton.config(text="Stop test", command=self.stop_test)
         # print(self.device.current(), self.device.get())
@@ -39,8 +39,8 @@ class UI:
         self.n_status.grid(row=2, column=1, padx=0, pady=10)
 
     def stop_test(self):
-        global running
-        running = False
+        global FLAG
+        FLAG = False
 
         self.testButton.config(text="Start test", command=self.start_test)
 
