@@ -43,7 +43,7 @@ def printer():
             clear_screen()
             print("Status: PASS ")
 
-    print("r")
+    print("--------------------------------------")
     print("Succeed count:", count)
     print("Failed count:", f_count)
     print("Success rate:%.2f" % ((count-f_count)/count*100)+"%")
