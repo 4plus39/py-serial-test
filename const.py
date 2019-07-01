@@ -1,6 +1,6 @@
 # Serial
 BAU_RATE = 115200
-TIME_OUT = 0.5
+TIME_OUT = 0.1
 
 # Tkinter
 LOOP_TIME = 100
