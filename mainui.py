@@ -7,7 +7,7 @@ import const
 def loop():
     if testui.FLAG and app.device.get() != const.NULL_STR:
         # Repeat config same serial port will show "PermissionError" in Windows OS,but linux wouldn't        
-        if serial_port.name == None:
+        if serial_port.name is None:
             serial_port.name = app.device.get()
             serial_port.config(const.BAU_RATE, const.TIME_OUT)
         serial_port.send()
