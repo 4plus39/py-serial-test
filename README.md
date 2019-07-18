@@ -1,5 +1,5 @@
 # SerialPort-test-3
-SerialPort-test-3 is a tool for communication from SUT serial port to modem.
+Tx/Rx test tool for transmitting signal from system under test serial port to modem continuously.
 
 ## Environment
 language: Python 3.6.7
