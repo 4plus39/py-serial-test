@@ -21,8 +21,8 @@ def clear_screen():
 
 
 def printer():
-    count = 0
-    f_count = 0
+    all_count = 0
+    fail_count = 0
 
     while not keyboard.is_pressed('q'):
         print("---Test------------------------------")
@@ -33,20 +33,20 @@ def printer():
         print("Press key 'Q' to quit")
 
         serial_port.send()
-        count += 1
+        all_count += 1
         # print(serial_port.read())
         if serial_port.read() == const.NULL_LIST:
             clear_screen()
             print("Status: FAILED ")
-            f_count += 1
+            fail_count += 1
         else:
             clear_screen()
             print("Status: PASS ")
 
     print("--------------------------------------")
-    print("Succeed count:", count)
-    print("Failed count:", f_count)
-    print("Success rate:%.2f" % ((count-f_count)/count*100)+"%")
+    print("Succeed count:", all_count-fail_count)
+    print("Failed count:", fail_count)
+    print("Success rate:%.2f" % ((all_count-fail_count)/all_count*100)+"%")
     print("--------------------------------------")
 
 
