@@ -2,6 +2,7 @@ import os
 import keyboard
 import testio
 import const
+import time
 
 
 def pause():
@@ -23,6 +24,9 @@ def clear_screen():
 def printer():
     all_count = 0
     fail_count = 0
+    
+    start_clock = time.time()
+    start_time = time.strftime("%m-%d %H:%M:%S", time.localtime())
 
     while not keyboard.is_pressed('q'):
         print("---Test------------------------------")
@@ -42,12 +46,18 @@ def printer():
         else:
             clear_screen()
             print("Status: PASS ")
-
-    print("--------------------------------------")
-    print("Succeed count:", all_count-fail_count)
-    print("Failed count:", fail_count)
-    print("Success rate:%.2f" % ((all_count-fail_count)/all_count*100)+"%")
-    print("--------------------------------------")
+    
+    end_clock = time.time()
+    end_time = time.strftime("%m-%d %H:%M:%S", time.localtime())
+    clear_screen()
+    print("----------------------------------------")
+    print("Succeed count:\t\t%15d" %(all_count-fail_count))
+    print("Failed count:\t\t%15d" %fail_count)
+    print("Success rate:\t\t%14.2f" %((all_count-fail_count)/all_count*100)+"%")
+    print("Start time: \t\t", start_time)
+    print("End time: \t\t", end_time)
+    print("Execution time:\t\t %13.2f" %(end_clock - start_clock)+"s")
+    print("----------------------------------------")
 
 
 if __name__ == '__main__':
