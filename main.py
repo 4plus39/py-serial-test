@@ -41,23 +41,25 @@ def printer():
         # print(serial_port.read())
         if serial_port.read() == const.NULL_LIST:
             clear_screen()
+            print("-------------------------------------")
             print("Status: FAILED ")
             fail_count += 1
         else:
             clear_screen()
+            print("-------------------------------------")
             print("Status: PASS ")
     
     end_clock = time.time()
     end_time = time.strftime("%m-%d %H:%M:%S", time.localtime())
     clear_screen()
-    print("----------------------------------------")
-    print("Succeed count:\t\t%15d" %(all_count-fail_count))
-    print("Failed count:\t\t%15d" %fail_count)
-    print("Success rate:\t\t%14.2f" %((all_count-fail_count)/all_count*100)+"%")
-    print("Start time: \t\t", start_time)
-    print("End time: \t\t", end_time)
-    print("Execution time:\t\t %13.2f" %(end_clock - start_clock)+"s")
-    print("----------------------------------------")
+    print("┌───────────────────────────────────────┐")
+    print("│ Succeed count:\t%15d │" %(all_count-fail_count))
+    print("│ Failed count:\t\t%15d │" %fail_count)
+    print("│ Success rate:\t\t%14.2f%% │" %((all_count-fail_count)/all_count*100))
+    print("│ Start time: \t\t", start_time+" │")
+    print("│ End time: \t\t", end_time+" │")
+    print("│ Execution time:\t %13.2fs │" %(end_clock - start_clock))
+    print("└───────────────────────────────────────┘")
 
 
 if __name__ == '__main__':
