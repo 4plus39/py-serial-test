@@ -5,7 +5,8 @@ Tx/Rx test tool for transmitting signal from system under test serial port to mo
 language: Python 3.6.7
 
 #### os
-* Ubuntu 18.04
+* Ubuntu 18.04(gnome)
+* Manjaro 18.04(gnome)
 * windows server 2012R2
 * windows server 2016
 
@@ -27,14 +28,14 @@ Use the package manager apt to install tkinter.
 
 ## Image
 ### Text mode
-![](./images/text_start.png)
+![](./images/text_first.png)
 
-![](./images/text_pass.png)
+![](./images/text_second.png)
 
-![](./images/text_result.png)
+![](./images/text_third.png)
 ### GUI mode
 ![](./images/start.png)
-![](./images/select.png)  
+![](./images/select.png)
 ![](./images/failed.png)
 ![](./images/pass.png)
 
