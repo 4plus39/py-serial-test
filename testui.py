@@ -32,7 +32,8 @@ class UI:
     def start_test(self):
         global FLAG
         FLAG = True
-
+        
+        self.device.config(state='disabled')
         self.testButton.config(text="Stop test", command=self.stop_test)
         # print(self.device.current(), self.device.get())
 
@@ -51,3 +52,4 @@ class UI:
 
     def status_fail(self):
         self.n_status.config(text="FAILED", bg='red')
+

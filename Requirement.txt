@@ -2,3 +2,4 @@ keyboard==0.13.3
 pyserial==3.4
 PyInstaller==3.5
 staticx==0.7.0
+patchelf-wrapper==1.0.4

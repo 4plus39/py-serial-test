@@ -34,11 +34,15 @@ class SerialPort(object):
     def input(self):
         self.name = self.device[int(input("Input serial device number:"))]
 
-    def config(self, bau_rate, time_out):
-        self.port = serial.Serial(self.name, bau_rate, timeout=time_out)
+    def config(self, baud_rate, time_out):
+        self.port = serial.Serial(self.name, baud_rate, timeout=time_out)
 
     def send(self):
         self.port.write(str.encode('ATI\r'))
 
     def read(self):
         return self.port.readlines()
+        
+    def close(self):
+        self.port.close()
+

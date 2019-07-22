@@ -2,29 +2,31 @@
 Tx/Rx test tool for transmitting signal from system under test serial port to modem continuously.
 
 ## Environment
-language: Python 3.6.7
+Language: Python 3
 
-#### os
-* Ubuntu 18.04(gnome)
-* Manjaro 18.04(gnome)
+#### Supported operating system
+* Ubuntu 18.04
+* Manjaro 18.04(Gnome)
 * windows server 2012R2
 * windows server 2016
 
-## Requirement
-Use the package manager pip to install pyserial.
+## Installation
+##### Use the package manager pip to install pyserial.
 
-    pip install pyserial
-    pip install keyboard
-Use the package manager apt to install tkinter.
+`sudo pip install -r Requirement.txt`
 
-    sudo apt-get install python3-tk
+##### Use the package manager apt to install tkinter.
 
-## execution
-### Text mode
+Ubuntu `sudo apt-get install python3-tk`
+
+Manjaro `sudo pacman -S tk`
+
+## Execution
+#### Text mode
     sudo python main.py
 
-### GUI mode
-    sudo python mainUI.py
+#### GUI mode
+    sudo python mainui.py
 
 ## Image
 ### Text mode
