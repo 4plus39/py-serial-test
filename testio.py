@@ -29,10 +29,10 @@ class SerialPort(object):
 
     def list(self):
         for index in range(len(self.device)):
-            print("number:", index, "   ", "device:", self.device[index])
+            print(" Number:", index, "   ", "Device:", self.device[index])
 
     def input(self):
-        self.name = self.device[int(input("Input serial device number:"))]
+        self.name = self.device[int(input(" Input serial device number:"))]
 
     def config(self, baud_rate, time_out):
         self.port = serial.Serial(self.name, baud_rate, timeout=time_out)

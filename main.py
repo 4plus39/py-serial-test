@@ -8,7 +8,7 @@ import time
 def pause():
     print()
     try:
-        input("Press the <ENTER> key to continue...")
+        input(" Press the <ENTER> key to continue...")
     except SyntaxError:
         pass
     clear_screen()
@@ -87,7 +87,7 @@ if __name__ == '__main__':
     serial_port.config(const.BAUD_RATE, const.TIMEOUT)
 
     if serial_port.port.is_open:
-        print("Serial port [", serial_port.name, "] is open")
+        print(" Serial port [", serial_port.name, "] is open")
         pause()
         testing()
         serial_port.close()
