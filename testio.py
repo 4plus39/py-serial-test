@@ -27,6 +27,12 @@ class SerialPort(object):
             except (OSError, serial.SerialException):
                 pass
 
+    def check(self):
+        if self.device == []:
+            print(" \nNo serial port was found...")
+            print(" Please confirm your permission.\n")
+            exit()
+
     def list(self):
         for index in range(len(self.device)):
             print(" Number:", index, "   ", "Device:", self.device[index])

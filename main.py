@@ -78,9 +78,10 @@ if __name__ == '__main__':
     clear_screen()
 
     serial_port.scan()
+    serial_port.check()
     print("-------------------------------------")
     serial_port.list()
-    print("")
+    print("-------------------------------------")
     serial_port.input()
     print('-------------------------------------')
 
