@@ -1,6 +1,7 @@
 import platform
 import glob
 import serial
+import sys
 
 
 class SerialPort(object):
@@ -29,9 +30,9 @@ class SerialPort(object):
 
     def check(self):
         if self.device == []:
-            print(" \nNo serial port was found...")
+            print("\n No serial port was found...")
             print(" Please confirm your permission.\n")
-            exit()
+            sys.exit()
 
     def list(self):
         for index in range(len(self.device)):
