@@ -19,19 +19,24 @@ class SerialPort(object):
             ports = ['COM%s' % (i + 1) for i in range(256)]
         else:
             print("Unknown os")
-
+            
+        self.try_port(ports)
+            
+    def try_port(self, ports):
         for port in ports:
             try:
-                s = serial.Serial(port)
-                s.close()
+                sp = serial.Serial(port)
+                sp.close()
                 self.device.append(port)
             except (OSError, serial.SerialException):
                 pass
+                
+        self.device.sort()
 
     def check(self):
         if self.device == []:
             print("\n No serial port was found...")
-            print(" Please confirm your permission.\n")
+            print(" Please confirm you are root or admin.\n")
             sys.exit()
 
     def list(self):
