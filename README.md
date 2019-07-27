@@ -4,28 +4,28 @@ Tx/Rx test tool for transmitting signal from system under test serial port to mo
 ## Environment
 Language: Python 3
 
-#### Supported operating system
+### Supported operating system
 * Ubuntu 18.04
 * Manjaro 18.04(Gnome)
 * windows server 2012R2
 * windows server 2016
 
 ## Installation
-##### Use the package manager pip to install pyserial.
+### Use the package manager pip to install pyserial.
 
 `sudo pip install -r Requirement.txt`
 
-##### Use the package manager apt to install tkinter.
+### Use the Linux package manager software to install tkinter.
 
-Ubuntu `sudo apt-get install python3-tk`
+**Debian**  `sudo apt-get install python3-tk`
 
-Manjaro `sudo pacman -S tk`
+**Arch** `sudo pacman -S tk`
 
 ## Execution
-#### Text mode
+### Text mode
     sudo python main.py
 
-#### GUI mode
+### GUI mode
     sudo python mainui.py
 
 ## Image
