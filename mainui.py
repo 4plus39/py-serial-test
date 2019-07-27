@@ -8,6 +8,8 @@ def loop():
     if testui.FLAG and app.device.get() != const.NULL_STR:
         # Repeat config same serial port will show "PermissionError" in Windows OS,but linux wouldn't
         if serial_port.name != app.device.get():
+            # Change test port,so close the previous port
+            serial_port.close()
             serial_port.name = app.device.get()
             serial_port.config(const.BAUD_RATE, const.TIMEOUT)
 
@@ -36,3 +38,5 @@ if __name__ == '__main__':
     # After LOOP_TIME millisecond, call loop()
     root.after(const.LOOP_TIME, loop)
     root.mainloop()
+    
+    serial_port.close()
