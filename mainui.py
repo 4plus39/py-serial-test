@@ -10,8 +10,7 @@ def loop():
         if serial_port.name != app.device.get():
             serial_port.name = app.device.get()
             serial_port.config(const.BAUD_RATE, const.TIMEOUT)
-            
-        print(serial_port.name)
+
         serial_port.send()
 
         if serial_port.read() == const.NULL_LIST:
@@ -28,9 +27,10 @@ def loop():
 
 if __name__ == '__main__':
     serial_port = testio.SerialPort(None)
-    serial_port.scan()
     root = tk.Tk()
     app = testui.UI(root)
+    
+    serial_port.scan()
     app.device['values'] = serial_port.device
 
     # After LOOP_TIME millisecond, call loop()

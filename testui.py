@@ -55,5 +55,5 @@ class UI:
         self.n_status.config(text="FAILED", fg="black", bg='red')
         
     def null_device(self):
-        self.n_status.config(text="Null device", fg='red')
+        self.n_status.config(text="Null", fg='red')
 
