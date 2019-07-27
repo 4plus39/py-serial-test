@@ -34,7 +34,8 @@ class SerialPort(object):
         self.device.sort()
 
     def check(self):
-        if self.device == []:
+        # It's can be simplified than "if self.device == []:"
+        if not self.device:
             print("\n No serial port was found...")
             print(" Please confirm you are root or admin.\n")
             sys.exit()

@@ -15,12 +15,13 @@ def loop():
 
         serial_port.send()
 
+        # Maybe can express "if not serial_port.read()"
         if serial_port.read() == const.NULL_LIST:
             app.status_fail()
         else:
             app.status_pass()
 
-    if testui.FLAG == True and app.device.get() == const.NULL_STR:
+    if testui.FLAG is True and app.device.get() == const.NULL_STR:
         app.null_device()
     
     # After LOOP_TIME millisecond, call loop() again

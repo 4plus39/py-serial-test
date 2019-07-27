@@ -13,17 +13,20 @@ def pause():
         pass
     clear_screen()
 
+
 def clear_screen():
     if serial_port.system.lower() == "linux":
         os.system("clear")
     elif serial_port.system.lower() == "windows":
         os.system("cls")
 
+
 def timer():
     timestamp = time.time()
     time_format = time.strftime("%m-%d %H:%M:%S", time.localtime())
     return timestamp, time_format
-    
+
+
 def testing():
     count = 0
     failed_count = 0
@@ -60,16 +63,17 @@ def testing():
     
     end_timestamp, end_time = timer()
     report(count, failed_count, start_time, end_time, end_timestamp-start_timestamp)
-    
+
+
 def report(count, failed_count, start_time, end_time, execution_time):
     clear_screen()
     print("┌───────────────────────────────────────┐")
-    print("│ Succeed count:\t%15d │" %(count-failed_count))
-    print("│ Failed count:\t\t%15d │" %failed_count)
-    print("│ Success rate:\t\t%14.2f%% │" %((count-failed_count)/count*100))
+    print("│ Succeed count:\t%15d │" % (count-failed_count))
+    print("│ Failed count:\t\t%15d │" % failed_count)
+    print("│ Success rate:\t\t%14.2f%% │" % ((count-failed_count)/count*100))
     print("│ Start time: \t\t", start_time, "│")
     print("│ End time: \t\t", end_time, "│")
-    print("│ Execution time:\t %13.2fs │" %execution_time)
+    print("│ Execution time:\t %13.2fs │" % execution_time)
     print("└───────────────────────────────────────┘")
 
 
