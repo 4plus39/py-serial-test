@@ -1,4 +1,4 @@
-py-serial-test
+# py-serial-test
 Tx/Rx test tool for transmitting signal from system under test serial port to modem continuously.
 
 ## Environment
