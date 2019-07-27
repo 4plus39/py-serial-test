@@ -6,10 +6,12 @@ import const
 
 def loop():
     if testui.FLAG and app.device.get() != const.NULL_STR:
-        # Repeat config same serial port will show "PermissionError" in Windows OS,but linux wouldn't        
-        if serial_port.name is None:
+        # Repeat config same serial port will show "PermissionError" in Windows OS,but linux wouldn't
+        if serial_port.name != app.device.get():
             serial_port.name = app.device.get()
             serial_port.config(const.BAUD_RATE, const.TIMEOUT)
+            
+        print(serial_port.name)
         serial_port.send()
 
         if serial_port.read() == const.NULL_LIST:
@@ -17,6 +19,9 @@ def loop():
         else:
             app.status_pass()
 
+    if testui.FLAG == True and app.device.get() == const.NULL_STR:
+        app.null_device()
+    
     # After LOOP_TIME millisecond, call loop() again
     root.after(const.LOOP_TIME, loop)
 

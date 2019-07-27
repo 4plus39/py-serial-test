@@ -42,14 +42,18 @@ class UI:
     def stop_test(self):
         global FLAG
         FLAG = False
-
+        
+        self.device.config(state='readonly')
         self.testButton.config(text="Start test", command=self.start_test)
 
         self.n_status.grid_forget()
 
     def status_pass(self):
-        self.n_status.config(text="PASS", bg='green')
+        self.n_status.config(text="PASS", fg="black", bg='green')
 
     def status_fail(self):
-        self.n_status.config(text="FAILED", bg='red')
+        self.n_status.config(text="FAILED", fg="black", bg='red')
+        
+    def null_device(self):
+        self.n_status.config(text="Null device", fg='red')
 
