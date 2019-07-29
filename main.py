@@ -30,17 +30,25 @@ def timer():
 def testing():
     count = 0
     failed_count = 0
-
     start_timestamp, start_time = timer()
 
     while not keyboard.is_pressed('q'):
-        print("-------------------------------------")
+        serial_port.send()
+        count += 1
+        if serial_port.read() == const.NULL_LIST:
+            clear_screen()
+            print("----------------------------")
+            print(" Status: FAILED ")
+            failed_count += 1
+        else:
+            clear_screen()
+            print("----------------------------")
+            print(" Status: PASS ")
+        print("----------------------------")
         print(" Serial port =", serial_port.name)
         print(" Baud rate =", const.BAUD_RATE)
         print(" Time out =", const.TIMEOUT)
-        print("-------------------------------------")
-        print(" Press key 'Q' to quit")
-        
+        print("----------------------------")
         print(" Program is ongoing ", end='')
         if int(time.time())%3 == 1:
             print(".")
@@ -48,19 +56,8 @@ def testing():
             print("..")
         else:
             print("...")
-
-        serial_port.send()
-        count += 1
-        if serial_port.read() == const.NULL_LIST:
-            clear_screen()
-            print("-------------------------------------")
-            print(" Status: FAILED ")
-            failed_count += 1
-        else:
-            clear_screen()
-            print("-------------------------------------")
-            print(" Status: PASS ")
-    
+        print("     Press key 'Q' to quit")
+        
     end_timestamp, end_time = timer()
     report(count, failed_count, start_time, end_time, end_timestamp-start_timestamp)
 
@@ -83,11 +80,11 @@ if __name__ == '__main__':
 
     serial_port.scan()
     serial_port.check()
-    print("-------------------------------------")
+    print("----------------------------------")
     serial_port.list()
-    print("-------------------------------------")
+    print("----------------------------------")
     serial_port.input()
-    print('-------------------------------------')
+    print('----------------------------------')
 
     serial_port.config(const.BAUD_RATE, const.TIMEOUT)
 

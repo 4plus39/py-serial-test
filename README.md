@@ -30,7 +30,7 @@ Language: Python3
 
 ## Image
 ### Text mode
-![](./images/text_select.png)
+![](./images/text_sel.png)
 
 ![](./images/text_test.png)
 
