@@ -2,7 +2,7 @@
 Tx/Rx test tool for transmitting signal from system under test serial port to modem continuously.
 
 ## Environment
-Language: Python 3
+Language: Python3
 
 ### Supported operating system
 * Ubuntu 18.04
