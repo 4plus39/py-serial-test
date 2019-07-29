@@ -30,11 +30,11 @@ Language: Python 3
 
 ## Image
 ### Text mode
-![](./images/text_first.png)
+![](./images/text_select.png)
 
-![](./images/text_second.png)
+![](./images/text_text_test.png)
 
-![](./images/text_third.png)
+![](./images/text_result.png)
 ### GUI mode
 ![](./images/start.png)
 ![](./images/select.png)
