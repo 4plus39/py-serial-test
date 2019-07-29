@@ -32,7 +32,7 @@ Language: Python 3
 ### Text mode
 ![](./images/text_select.png)
 
-![](./images/text_text_test.png)
+![](./images/text_test.png)
 
 ![](./images/text_result.png)
 ### GUI mode
