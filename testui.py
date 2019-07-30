@@ -7,8 +7,8 @@ FLAG = False
 
 class UI:
     def __init__(self, master):
-        master.title("Serial Port Test  ")
-        master.geometry("200x120")
+        master.title("Serial-Port Test")
+        master.geometry("220x120")
 
         frame = tk.Frame(master)
         frame.pack()

@@ -2,6 +2,9 @@ import tkinter as tk
 import testio
 import testui
 import const
+from history import conf_save
+from history import conf_read
+from history import file_rep
 
 
 def loop():
@@ -30,14 +33,21 @@ def loop():
 
 if __name__ == '__main__':
     serial_port = testio.SerialPort(None)
+    serial_port.scan()
+    serial_port.check()
     root = tk.Tk()
     app = testui.UI(root)
     
-    serial_port.scan()
+
+    app.device.set(conf_read())
     app.device['values'] = serial_port.device
 
     # After LOOP_TIME millisecond, call loop()
     root.after(const.LOOP_TIME, loop)
     root.mainloop()
     
+    conf_save(serial_port.name)
+    
     serial_port.close()
+    
+    # file_rep(100, 50, 777, 888, 999)
