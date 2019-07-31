@@ -2,6 +2,7 @@ import platform
 import glob
 import serial
 import sys
+import const
 
 
 class SerialPort(object):
@@ -16,7 +17,7 @@ class SerialPort(object):
         if self.system.lower() == "linux":
             ports = glob.glob('/dev/tty[A-Za-z]*')
         elif self.system.lower() == "windows":
-            ports = ['COM%s' % (i + 1) for i in range(256)]
+            ports = ['COM%s' % (i+1) for i in range(256)]
         else:
             print("Unknown os")
             
@@ -34,7 +35,6 @@ class SerialPort(object):
         self.device.sort()
 
     def check(self):
-        # It's can be simplified than "if self.device == []:"
         if not self.device:
             print("\n No serial port was found...")
             print(" Please confirm you are root or admin.\n")
@@ -52,9 +52,13 @@ class SerialPort(object):
 
     def send(self):
         self.port.write(str.encode('ATI\r'))
+        return 1
 
     def read(self):
-        return self.port.readlines()
+        if self.port.readlines() == []:
+            return 0
+        else:
+            return 1
         
     def close(self):
         self.port.close()
