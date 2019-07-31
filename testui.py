@@ -30,14 +30,17 @@ class UI:
         self.n_status = tk.Label(frame, text="")
 
     def start_test(self):
-        global FLAG
-        FLAG = True
-        
-        self.device.config(state='disabled')
-        self.testButton.config(text="Stop test", command=self.stop_test)
-        # print(self.device.current(), self.device.get())
-
-        self.n_status.grid(row=2, column=1, padx=0, pady=10)
+        if self.device.get() == "":
+            self.null_device()
+        else:
+            global FLAG
+            FLAG = True
+            
+            self.device.config(state='disabled')
+            self.testButton.config(text="Stop test", command=self.stop_test)
+            # print(self.device.current(), self.device.get())
+            
+            self.n_status.grid(row=2, column=1, padx=0, pady=10)
 
     def stop_test(self):
         global FLAG
@@ -52,8 +55,9 @@ class UI:
         self.n_status.config(text="PASS", fg="black", bg='green')
 
     def status_fail(self):
-        self.n_status.config(text="FAILED", fg="black", bg='red')
+        self.n_status.config(text="FAIL", fg="black", bg='red')
         
     def null_device(self):
         self.n_status.config(text="Null", fg='red')
+        self.n_status.grid(row=2, column=1, padx=0, pady=10)
 
