@@ -3,6 +3,7 @@ import keyboard
 import testio
 import const
 import time
+from history import timer
 
 
 def pause():
@@ -15,16 +16,10 @@ def pause():
 
 
 def clear_screen():
-    if sp.system.lower() == "linux":
+    if ser.system.lower() == "linux":
         os.system("clear")
-    elif sp.system.lower() == "windows":
+    elif ser.system.lower() == "windows":
         os.system("cls")
-
-
-def timer():
-    ts = time.time()
-    tf = time.strftime("%m-%d %H:%M:%S", time.localtime())
-    return ts, tf
 
 
 def testing():
@@ -33,9 +28,9 @@ def testing():
     start_ts, start_tf = timer()
 
     while not keyboard.is_pressed('q'):
-        sp.send()
+        ser.send()
         cnt += 1
-        if not sp.read():
+        if not ser.read():
             clear_screen()
             print("----------------------------")
             print(" Status: FAILED ")
@@ -45,7 +40,7 @@ def testing():
             print("----------------------------")
             print(" Status: PASS ")
         print("----------------------------")
-        print(" Serial port =", sp.name)
+        print(" Serial port =", ser.name)
         print(" Baud rate =", const.BAUD_RATE)
         print(" Time out =", const.TIMEOUT)
         print("----------------------------")
@@ -64,33 +59,33 @@ def testing():
 
 def report(cnt, fcnt, start_tf, end_tf, exe_time):
     clear_screen()
-    print("┌───────────────────────────────────────┐")
-    print("│ Succeed count:\t%15d │" % (cnt-fcnt))
-    print("│ Failed count:\t\t%15d │" % fcnt)
-    print("│ Success rate:\t\t%14.2f%% │" % ((cnt-fcnt)/cnt*100))
-    print("│ Start time: \t\t", start_tf, "│")
-    print("│ End time: \t\t", end_tf, "│")
-    print("│ Execution time:\t %13.2fs │" % exe_time)
-    print("└───────────────────────────────────────┘")
+    print("---------------------------------")
+    print(" Succeed count : %d " % (cnt-fcnt))
+    print(" Failed count  : %d " % fcnt)
+    print(" Success rate  : %.2f%% " % ((cnt-fcnt)/cnt*100))
+    print(" Start time    : %s" % (start_tf))
+    print(" End time      : %s" % (end_tf))
+    print(" Execution time: %.2fs" % (exe_time))
+    print("---------------------------------")
 
 
 if __name__ == '__main__':
-    sp = testio.SerialPort(None)
+    ser = testio.SerialPort(None)
 
-    sp.scan()
-    sp.check()
+    ser.scan()
+    ser.check()
     clear_screen()
     print("----------------------------------")
-    sp.list()
+    ser.list()
     print("----------------------------------")
-    sp.input()
+    ser.input()
     print('----------------------------------')
 
-    sp.config(const.BAUD_RATE, const.TIMEOUT)
+    ser.config(const.BAUD_RATE, const.TIMEOUT)
 
-    if sp.port.is_open:
-        print(" Serial port [", sp.name, "] is open")
+    if ser.port.is_open:
+        print(" Serial port [ %s ] is open" % (ser.name))
         pause()
         testing()
-        sp.close()
+        ser.close()
 

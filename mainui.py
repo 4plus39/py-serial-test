@@ -5,21 +5,26 @@ import const
 from history import conf_save
 from history import conf_read
 from history import file_rep
+from history import timer
 
 
 def loop():
     if testui.FLAG and app.device.get() != const.NULL_STR:
         # Repeat config same serial port will show "PermissionError" in Windows OS,but linux wouldn't
-        if serial_port.name != app.device.get():
+        if ser.name != app.device.get():
             # Change test port,so close the previous port
-            serial_port.close()
-            serial_port.name = app.device.get()
-            serial_port.config(const.BAUD_RATE, const.TIMEOUT)
-        serial_port.send()
+            ser.close()
+            ser.name = app.device.get()
+            ser.config(const.BAUD_RATE, const.TIMEOUT)
+            ser.start_ts, ser.start_tf = timer()
+            ser.cnt = 0
+        
+        ser.cnt += ser.send()
 
-        # Maybe can express "if not serial_port.read()"
-        if serial_port.read() == const.NULL_LIST:
+        # Maybe can express "if not ser.read()"
+        if not ser.read():
             app.status_fail()
+            ser.fcnt += 1
         else:
             app.status_pass()
     
@@ -28,22 +33,25 @@ def loop():
 
 
 if __name__ == '__main__':
-    serial_port = testio.SerialPort(None)
-    serial_port.scan()
-    serial_port.check()
+    ser = testio.SerialPort(None)
+    ser.scan()
+    ser.check()
     root = tk.Tk()
     app = testui.UI(root)
     
-
     app.device.set(conf_read())
-    app.device['values'] = serial_port.device
+    app.device['values'] = ser.device
 
     # After LOOP_TIME millisecond, call loop()
     root.after(const.LOOP_TIME, loop)
     root.mainloop()
     
-    conf_save(serial_port.name)
+    ser.end_ts, ser.end_tf = timer()
     
-    serial_port.close()
+    conf_save(ser.name)
     
-    # file_rep(100, 50, 777, 888, 999)
+    ser.close()
+    
+    if ser.end_ts != None and ser.start_ts != None:
+        file_rep(ser.cnt, ser.fcnt, ser.start_tf, ser.end_tf, ser.end_ts-ser.start_ts)
+

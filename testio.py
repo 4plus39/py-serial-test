@@ -11,6 +11,12 @@ class SerialPort(object):
         self.port = serial.Serial()
         self.device = []
         self.system = platform.system()
+        self.start_ts = None
+        self.start_tf = None
+        self.end_ts = None
+        self.end_tf = None
+        self.cnt=0
+        self.fcnt=0
 
     def scan(self):
         ports = None
@@ -45,7 +51,13 @@ class SerialPort(object):
             print(" Number:", index, "   ", "Device:", self.device[index])
 
     def input(self):
-        self.name = self.device[int(input(" Input serial device number:"))]
+        while True:
+            try:
+                self.name = self.device[int(input(" Input serial device number:"))]
+            except IndexError:
+                print(" Please input correct device number.")
+            else:
+                break
 
     def config(self, baud_rate, time_out):
         self.port = serial.Serial(self.name, baud_rate, timeout=time_out)

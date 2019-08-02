@@ -1,3 +1,10 @@
+import time
+
+def timer():
+    ts = time.time()
+    tf = time.strftime("%m-%d %H:%M:%S", time.localtime())
+    return ts, tf
+
 def conf_save(dev):
     if dev is None:
         return 0
@@ -6,7 +13,7 @@ def conf_save(dev):
     fo.write("Serial port name:")
     fo.write('\n')
     fo.write(dev)
-    
+    fo.write('\n')
     fo.close
 
 def conf_read():
@@ -15,19 +22,19 @@ def conf_read():
     except FileNotFoundError:
         return ''
     fo.readline()
-    str = fo.readline()
+    str = fo.readline().splitlines()
     fo.close
     return str
     
-def file_rep(count, failed_count, start_time, end_time, execution_time):
+def file_rep(cnt, fcnt, start_tf, end_tf, exe_time):
     fo = open("serial-port-test-log", "a")
-    fo.write('\n')
-    fo.write("\n")
-    fo.write(" Succeed count:\t\t%15d \n" % (count-failed_count))
-    fo.write(" Failed count:\t\t%15d \n" % failed_count)
-    fo.write(" Success rate:\t\t%14.2f%% \n" % ((count-failed_count)/count*100))
-    fo.write(" Start time: \t\t%s\n" % (start_time))
-    fo.write(" End time: \t\t%s\n" % (end_time))
-    fo.write(" Execution time:\t %13.2fs \n" % (execution_time))
+    fo.write("---------------------------------\n")
+    fo.write(" Succeed count : %d \n" % (cnt-fcnt))
+    fo.write(" Failed count  : %d \n" % fcnt)
+    fo.write(" Success rate  : %.2f%% \n" % ((cnt-fcnt)/cnt*100))
+    fo.write(" Start time    : %s\n" % (start_tf))
+    fo.write(" End time      : %s\n" % (end_tf))
+    fo.write(" Execution time: %.2fs \n" % (exe_time))
     fo.write("\n")
     fo.close
+
