@@ -2,7 +2,6 @@ import platform
 import glob
 import serial
 import sys
-import const
 
 
 class SerialPort:
@@ -65,7 +64,7 @@ class SerialPort:
         return 1
 
     def read(self):
-        if self.port.readlines() == []:
+        if not self.port.readlines():
             return 0
         else:
             return 1

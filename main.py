@@ -6,6 +6,13 @@ import time
 import record
 
 
+def printrep():
+    if ser.system.lower() == "linux":
+        os.system("cat serial-port-test-log")
+    elif ser.system.lower() == "windows":
+        os.system("type serial-port-test-log")
+
+
 def pause():
     print()
     try:
@@ -14,11 +21,13 @@ def pause():
         pass
     clear_screen()
 
+
 def clear_screen():
     if ser.system.lower() == "linux":
         os.system("clear")
     elif ser.system.lower() == "windows":
         os.system("cls")
+
 
 def testing():
     rec.timer_start()
@@ -35,21 +44,24 @@ def testing():
             clear_screen()
             print("----------------------------")
             print(" Status: PASS ")
+        '''
         print("----------------------------")
         print(" Serial port =", ser.name)
         print(" Baud rate =", const.BAUD_RATE)
         print(" Time out =", const.TIMEOUT)
         print("----------------------------")
         print(" Program is ongoing ", end='')
-        if int(time.time())%3 == 1:
+        if int(time.time()) % 3 == 1:
             print(".")
-        elif int(time.time())%3 == 2:
+        elif int(time.time()) % 3 == 2:
             print("..")
         else:
             print("...")
         print("     Press key 'Q' to quit")
+        '''
         
     rec.timer_end()
+
 
 if __name__ == '__main__':
     ser = testio.SerialPort(None)
@@ -66,15 +78,13 @@ if __name__ == '__main__':
     ser.config(const.BAUD_RATE, const.TIMEOUT)
 
     if ser.port.is_open:
-        print(" Serial port [ %s ] is open" % (ser.name))
+        print(" Serial port [ %s ] is open" % ser.name)
         pause()
         testing()
         ser.close()
     
     rec.conf_save(ser.name)
     clear_screen()
-    if rec.end_ts != None and rec.start_ts != None:
+    if rec.end_ts is not None and rec.start_ts is not None:
         rec.file_rep()
-        if ser.system.lower() == "linux":
-            os.system("cat serial-port-test-log")
-
+        printrep()
