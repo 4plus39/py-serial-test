@@ -23,8 +23,6 @@ def loop():
             rec.fcnt += 1
         else:
             app.status_pass()
-    print("sc", rec.cnt)
-    print("sc", rec.fcnt)
     # After LOOP_TIME millisecond, call loop() again
     root.after(const.LOOP_TIME, loop)
 
