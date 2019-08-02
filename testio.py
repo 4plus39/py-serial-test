@@ -5,18 +5,12 @@ import sys
 import const
 
 
-class SerialPort(object):
+class SerialPort:
     def __init__(self, name):
         self.name = name
         self.port = serial.Serial()
         self.device = []
         self.system = platform.system()
-        self.start_ts = None
-        self.start_tf = None
-        self.end_ts = None
-        self.end_tf = None
-        self.cnt=0
-        self.fcnt=0
 
     def scan(self):
         ports = None
@@ -54,13 +48,17 @@ class SerialPort(object):
         while True:
             try:
                 self.name = self.device[int(input(" Input serial device number:"))]
-            except IndexError:
+            except (IndexError, ValueError):
                 print(" Please input correct device number.")
             else:
                 break
 
     def config(self, baud_rate, time_out):
-        self.port = serial.Serial(self.name, baud_rate, timeout=time_out)
+        try:
+            self.port = serial.Serial(self.name, baud_rate, timeout=time_out)
+        except serial.serialutil.SerialException:
+            print(" Selected port cannot open.")
+            sys.exit()
 
     def send(self):
         self.port.write(str.encode('ATI\r'))

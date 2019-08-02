@@ -3,7 +3,7 @@ import keyboard
 import testio
 import const
 import time
-from history import timer
+import record
 
 
 def pause():
@@ -14,27 +14,23 @@ def pause():
         pass
     clear_screen()
 
-
 def clear_screen():
     if ser.system.lower() == "linux":
         os.system("clear")
     elif ser.system.lower() == "windows":
         os.system("cls")
 
-
 def testing():
-    cnt = 0
-    fcnt = 0
-    start_ts, start_tf = timer()
+    rec.timer_start()
 
     while not keyboard.is_pressed('q'):
         ser.send()
-        cnt += 1
+        rec.cnt += 1
         if not ser.read():
             clear_screen()
             print("----------------------------")
             print(" Status: FAILED ")
-            fcnt += 1
+            rec.fcnt += 1
         else:
             clear_screen()
             print("----------------------------")
@@ -53,25 +49,11 @@ def testing():
             print("...")
         print("     Press key 'Q' to quit")
         
-    end_ts, end_tf = timer()
-    report(cnt, fcnt, start_tf, end_tf, end_ts-start_ts)
-
-
-def report(cnt, fcnt, start_tf, end_tf, exe_time):
-    clear_screen()
-    print("---------------------------------")
-    print(" Succeed count : %d " % (cnt-fcnt))
-    print(" Failed count  : %d " % fcnt)
-    print(" Success rate  : %.2f%% " % ((cnt-fcnt)/cnt*100))
-    print(" Start time    : %s" % (start_tf))
-    print(" End time      : %s" % (end_tf))
-    print(" Execution time: %.2fs" % (exe_time))
-    print("---------------------------------")
-
+    rec.timer_end()
 
 if __name__ == '__main__':
     ser = testio.SerialPort(None)
-
+    rec = record.Log()
     ser.scan()
     ser.check()
     clear_screen()
@@ -88,4 +70,11 @@ if __name__ == '__main__':
         pause()
         testing()
         ser.close()
+    
+    rec.conf_save(ser.name)
+    clear_screen()
+    if rec.end_ts != None and rec.start_ts != None:
+        rec.file_rep()
+        if ser.system.lower() == "linux":
+            os.system("cat serial-port-test-log")
 
