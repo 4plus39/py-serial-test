@@ -1,8 +1,8 @@
 import os
 import keyboard
+import time
 import testio
 import const
-import time
 import record
 
 
@@ -14,9 +14,8 @@ def printrep():
 
 
 def pause():
-    print()
     try:
-        input(" Press the <ENTER> key to continue...")
+        input("\n Press the <ENTER> key to continue...")
     except SyntaxError:
         pass
     clear_screen()
@@ -44,7 +43,7 @@ def testing():
             clear_screen()
             print("----------------------------")
             print(" Status: PASS ")
-        '''
+        
         print("----------------------------")
         print(" Serial port =", ser.name)
         print(" Baud rate =", const.BAUD_RATE)
@@ -58,7 +57,6 @@ def testing():
         else:
             print("...")
         print("     Press key 'Q' to quit")
-        '''
         
     rec.timer_end()
 
