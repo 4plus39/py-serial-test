@@ -6,7 +6,7 @@ Language: Python3
 
 ### Supported operating system
 * Ubuntu 18.04
-* Manjaro 18.04(Gnome)
+* Manjaro 18.04
 * windows server 2012R2
 * windows server 2016
 
