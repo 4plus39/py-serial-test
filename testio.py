@@ -71,4 +71,3 @@ class SerialPort:
         
     def close(self):
         self.port.close()
-

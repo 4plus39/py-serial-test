@@ -2,15 +2,8 @@ import os
 import keyboard
 import time
 import testio
-import const
 import record
-
-
-def printrep():
-    if ser.system.lower() == "linux":
-        os.system("cat serial-port-test-log")
-    elif ser.system.lower() == "windows":
-        os.system("type serial-port-test-log")
+from const import *
 
 
 def pause():
@@ -46,8 +39,8 @@ def testing():
         
         print("----------------------------")
         print(" Serial port =", ser.name)
-        print(" Baud rate =", const.BAUD_RATE)
-        print(" Time out =", const.TIMEOUT)
+        print(" Baud rate =", BAUD_RATE)
+        print(" Time out =", TIMEOUT)
         print("----------------------------")
         print(" Program is ongoing ", end='')
         if int(time.time()) % 3 == 1:
@@ -73,7 +66,7 @@ if __name__ == '__main__':
     ser.input()
     print('----------------------------------')
 
-    ser.config(const.BAUD_RATE, const.TIMEOUT)
+    ser.config(BAUD_RATE, TIMEOUT)
 
     if ser.port.is_open:
         print(" Serial port [ %s ] is open" % ser.name)
@@ -81,8 +74,7 @@ if __name__ == '__main__':
         testing()
         ser.close()
     
-    rec.conf_save(ser.name)
+    rec.cfg_output(ser.name)
     clear_screen()
     if rec.end_ts is not None and rec.start_ts is not None:
-        rec.file_rep()
-        printrep()
+        rec.log_output(ser.name)
