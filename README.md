@@ -10,6 +10,9 @@ Language: Python3
 * windows server 2012R2
 * windows server 2016
 
+## Compilation
+`gcc` and `make` is needed if `pip install patchelf-wrapper` occurs error
+
 ## Installation
 ### Use the package manager pip to install pyserial.
 
@@ -40,4 +43,3 @@ Language: Python3
 ![](./images/select.png)
 ![](./images/failed.png)
 ![](./images/pass.png)
-
