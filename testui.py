@@ -7,7 +7,7 @@ FLAG = False
 
 class UI:
     def __init__(self, master):
-        master.title("Serial-Port Test")
+        master.title("SPTU")
         master.geometry("220x120")
 
         frame = tk.Frame(master)

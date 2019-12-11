@@ -5,7 +5,7 @@ sudo pyinstaller -F mainui.py
 cd ./dist
 
 # staticx [input file] [output file]
-staticx main ../sp-test
-staticx mainui ../sp-testui
+staticx main ../sptc
+staticx mainui ../sptu
 
 exit 0
